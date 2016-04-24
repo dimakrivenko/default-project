@@ -1,0 +1,34 @@
+//-----------------------------------
+//   Base styles
+//-----------------------------------
+
+body { 
+	background-color: #fff; 
+	font-size: 100%;
+}
+a {
+	-webkit-transition: .2s ease;
+	-moz-transition: .2s ease;
+	transition: .2s ease;
+}
+input, textarea, button { 
+	outline: none; 
+	// -webkit-appearance: none;
+	// -moz-appearance: none;
+	// appearance: none;
+    border-radius: 0; 
+    margin: 0;
+    padding: 0;
+}
+ul, li, p, h1, h2, h3, h4, h5, h6 { 
+	margin: 0; 
+	padding: 0;
+}
+
+.clear { clear: both; }
+
+.wrapper {
+	display: table;
+	width: 100%;
+	height: 100%;
+}
