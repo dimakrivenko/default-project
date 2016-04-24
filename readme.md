@@ -1,7 +1,7 @@
 # Default project
 
 
-Это стандартная сборка для бысрого разворачивания проекта
+Это стандартная сборка для быстрого разворачивания проекта
 
 Включает в себя следущее:
 
@@ -17,10 +17,10 @@
 Склонируй репозитори на комп:
 
 ```bash
-https://github.com/dimakrivenko/default-project.git projectname
+https://github.com/dimakrivenko/default-project.git default-project
 ```
 
-Перейди в папку установи все плагины:
+Перейди в папку и установи все плагины:
 
 ```bash
 cd default-project
@@ -28,7 +28,7 @@ npm install
 bower install
 ```
 
-Запуск происходит по командам 
+Запусти следующими командам:
 ```bash 
 gulp
 gulp build
