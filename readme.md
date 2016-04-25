@@ -14,7 +14,7 @@
 
 ### Установка
 
-Склонируй репозитори на комп:
+Склонируй репозиторий на комп:
 
 ```bash
 https://github.com/dimakrivenko/default-project.git default-project
