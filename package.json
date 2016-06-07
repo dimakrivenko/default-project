@@ -1,13 +1,13 @@
 {
-  "name": "foundation-zurb-template",
+  "name": "default-foundation-zurb",
   "version": "1.0.0",
-  "description": "Official ZURB Template for Foundation for Sites.",
+  "description": "My default ZURB Template Foundation",
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
     "build": "gulp build --production"
   },
-  "author": "ZURB <foundation@zurb.com>",
+  "author": "Dima Krivenko <wen2333@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.7.7",
@@ -54,11 +54,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zurb/foundation-zurb-template.git"
-  },
-  "bugs": {
-    "url": "https://github.com/zurb/foundation-sites/issues",
-    "email": "foundation@zurb.com"
+    "url": "https://github.com/dimakrivenko/default-project.git"
   },
   "private": true
 }
