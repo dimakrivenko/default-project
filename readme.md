@@ -17,7 +17,7 @@
 Склонируй репозиторий на комп:
 
 ```bash
-https://github.com/dimakrivenko/default-project.git default-project
+git-clone https://github.com/dimakrivenko/default-project.git
 ```
 
 Перейди в папку и установи все плагины:
