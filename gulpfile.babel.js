@@ -139,7 +139,7 @@ function server(done) {
     done();
 }
 
-// Отслеживание изменений в файлах
+// Отслеживание изменений в файлах - ////////////здесь косяк с автообновлением страницы 
 function watch() {
     gulp.watch(PATHS.assets, copy);
     gulp.watch('src/pages/**/*.html', gulp.series(pages, browser.reload));
