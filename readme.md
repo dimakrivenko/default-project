@@ -17,7 +17,7 @@
 Склонируй репозиторий на комп:
 
 ```bash
-git-clone https://github.com/dimakrivenko/default-project.git
+git clone https://github.com/dimakrivenko/default-project.git
 ```
 
 Перейди в папку и установи все плагины:
@@ -25,7 +25,7 @@ git-clone https://github.com/dimakrivenko/default-project.git
 ```bash
 cd default-project
 npm install
-bower install
+bower install или sudo bower install --allow-root
 ```
 
 Запусти следующими командам:
