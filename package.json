@@ -25,7 +25,7 @@
     "babel-register": "^6.7.2",
     "browser-sync": "^2.10.0",
     "css-mqpacker": "^4.0.1",
-    "gulp": "^3.9.1",
+    "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-babel": "^6.1.2",
     "gulp-cli": "1.2.1",
