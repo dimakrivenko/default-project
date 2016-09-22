@@ -1,5 +1,5 @@
 # Changelog
 
-## Version 1.0 (November 19, 2015)
+## Version 1.1 (September 22, 2016)
 
-Initial release.
+Теперь использую шаблонизатор Pug(Jade)

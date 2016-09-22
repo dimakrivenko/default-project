@@ -15,6 +15,7 @@ import pngquant from 'imagemin-pngquant'; // сжатие png
 import mqpacker from 'css-mqpacker'; // сгруппированные media query
 import opacity from 'postcss-opacity'; // сгруппированные media query
 import assets from 'postcss-assets'; // пути до файлов
+import pug from 'gulp-pug'; // Шаблонизатор Pug
 
 
 
@@ -34,7 +35,7 @@ function loadConfig() {
 
 // Компиляция в папку "dist" без отслеживания изменений 
 gulp.task('build',
-    gulp.series(clean, gulp.parallel(pages, sass, javascript, images, copy), styleGuide));
+    gulp.series(clean, gulp.parallel(pugTemplate, sass, javascript, images, copy), styleGuide));
 
 // Компиляция в папку "dist" с отслеживанием изменений в файлах
 gulp.task('default',
@@ -51,24 +52,17 @@ function copy() {
         .pipe(gulp.dest(PATHS.dist + '/assets'));
 }
 
-// Компиляция HTML шаблонов 
-function pages() {
-    return gulp.src('src/pages/**/*.{html,hbs,handlebars}')
-        .pipe(panini({
-            root: 'src/pages/',
-            layouts: 'src/layouts/',
-            partials: 'src/partials/',
-            data: 'src/data/',
-            helpers: 'src/helpers/'
+// Компиляция HTML шаблонов из Pug
+function pugTemplate() {
+    var pugData = require('./src/data/_main.json');
+    return gulp.src('src/pages/**/*.pug')
+        .pipe($.pug({
+            pretty: true,
+            locals: pugData
         }))
         .pipe(gulp.dest(PATHS.dist));
 }
 
-// Обновление шаблонов через шаблонизатор Panini
-function resetPages(done) {
-    panini.refresh();
-    done();
-}
 
 // Генерация Styleguide
 function styleGuide(done) {
@@ -139,13 +133,12 @@ function server(done) {
     done();
 }
 
-// Отслеживание изменений в файлах - ////////////здесь косяк с автообновлением страницы 
+// Отслеживание изменений в файлах 
 function watch() {
     gulp.watch(PATHS.assets, copy);
-    gulp.watch('src/pages/**/*.html', gulp.series(pages, browser.reload));
-    gulp.watch('src/{layouts,partials}/**/*.html', gulp.series(resetPages, pages, browser.reload));
+    gulp.watch('src/{pages,layouts,partials}/**/*.pug').on('change', gulp.series(pugTemplate, browser.reload));
     gulp.watch('src/assets/scss/**/*.scss', sass);
-    gulp.watch('src/assets/js/**/*.js', gulp.series(javascript, browser.reload));
-    gulp.watch('src/assets/img/**/*', gulp.series(images, browser.reload));
-    gulp.watch('src/styleguide/**', gulp.series(styleGuide, browser.reload));
+    gulp.watch('src/assets/js/**/*.js').on('change', gulp.series(javascript, browser.reload));
+    gulp.watch('src/assets/img/**/*').on('change', gulp.series(images, browser.reload));
+    gulp.watch('src/styleguide/**').on('change', gulp.series(styleGuide, browser.reload));
 }

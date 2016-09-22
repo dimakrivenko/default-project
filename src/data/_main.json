@@ -1,0 +1,12 @@
+{
+	"settings": {
+		"siteTitle": "Default Project"
+	},
+	"menus": {
+		"top_menu": {
+		    "Главная": "/",
+		    "О нас": "/about.html",
+		    "Контакты": "/contacts.html"
+		}
+	}
+}

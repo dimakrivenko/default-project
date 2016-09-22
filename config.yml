@@ -3,16 +3,19 @@ PORT: 8000
 
 # Autoprefixer will make sure your CSS works with these browsers
 COMPATIBILITY:
-  - "last 2 versions"
-  - "ie >= 9"
+  - "> 5%"
+  - "last 15 versions"
+  - "ie >= 7"
 
 # UnCSS will use these settings
 UNCSS_OPTIONS:
   html:
-    - "src/**/*.html"
+    - "dist/**/*.html"
   ignore:
     - !!js/regexp .foundation-mq
     - !!js/regexp ^\.is-.*
+    - !!js/regexp ^\.slick-.*
+    - !!js/regexp .slick-dots
 
 # Gulp will reference these paths when it copies files
 PATHS:

@@ -3,5 +3,11 @@
 //-----------------------------------
 
 .l-header {
-
+	.top-menu {
+		&__item {
+			display: inline-block;
+			margin-right: 10px;
+			&:last-child { margin-right: 0; } 
+		}
+	}
 }

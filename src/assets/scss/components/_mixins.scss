@@ -2,24 +2,51 @@
 //   Mixins
 //-----------------------------------
 
-//Миксин медиа запросов
+// Media query
+$breakpoints: (
+    "phone": 480px,
+    "tablet": 768px,
+    "tablet-wide": 992px,
+    "desktop": 1200px
+);
+@mixin mq($width, $type: max) {
+    @if map_has_key($breakpoints, $width) {
+        $width: map_get($breakpoints, $width);
+        @if $type == min {
+            $width: $width;
+        } @else  { $width: $width - 1px; }
+        @media only screen and (#{$type}-width: $width) {
+            @content;
+        }
+    }
+}
 
-$size_large: 1200px;
-$size_medium: 992px;
-$size_small: 768px;
-$size_x_small: 480px;
+// Для псевдо элементов
+@mixin pseudo($display: block, $pos: absolute, $content: '') {
+    content: $content;
+    display: $display;
+    position: $pos;
+}
 
-@mixin respond($media) {
-    @if $media == x_small {
-        @media only screen and (max-width: $size_x_small) { @content; }
+// Пропопции изображения
+@mixin ratio($x,$y, $pseudo: false) {
+    $padding: unquote( ( $y / $x ) * 100 + '%' );
+    @if $pseudo {
+        &:before {
+            @include pseudo($pos: relative);
+            width: 100%;
+            padding-top: $padding;
+        }
+    } @else {
+        padding-top: $padding;
     }
-    @else if $media == small {
-        @media only screen and (max-width: $size_small) { @content; }
-    }
-    @else if $media == medium {
-        @media only screen and (max-width: $size_medium - 1) { @content; }
-    }
-    @else if $media == large {
-        @media only screen and (max-width: $size_large) { @content; }
-    }
+}
+
+// Placeholder
+@mixin placeholder {
+    &:placeholder { @content; }
+    &:-moz-placeholder { @content; }
+    &::-moz-placeholder { @content; }
+    &:-ms-input-placeholder { @content; }
+    &::-webkit-input-placeholder { @content; }
 }
