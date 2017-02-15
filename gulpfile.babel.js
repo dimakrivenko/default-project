@@ -4,18 +4,18 @@ import plugins from 'gulp-load-plugins';
 import yargs from 'yargs';
 import browser from 'browser-sync';
 import gulp from 'gulp';
-import panini from 'panini';
 import rimraf from 'rimraf';
 import sherpa from 'style-sherpa';
 import yaml from 'js-yaml';
 import fs from 'fs';
 import pxtorem from 'postcss-pxtorem'; // px в rem
 import inlineSvg from 'postcss-inline-svg'; // svg в data:image
-import pngquant from 'imagemin-pngquant'; // сжатие png
+import imagemin from 'gulp-imagemin'; // сжатие изображений
 import mqpacker from 'css-mqpacker'; // сгруппированные media query
 import opacity from 'postcss-opacity'; // сгруппированные media query
 import assets from 'postcss-assets'; // пути до файлов
 import pug from 'gulp-pug'; // Шаблонизатор Pug
+import spritesmith from 'gulp.spritesmith' // генератор спрайтов
 
 
 
@@ -35,7 +35,7 @@ function loadConfig() {
 
 // Компиляция в папку "dist" без отслеживания изменений 
 gulp.task('build',
-    gulp.series(clean, gulp.parallel(pugTemplate, sass, javascript, images, copy), styleGuide));
+    gulp.series(clean, gulp.parallel(pugTemplate, sass, javascript, images, copy), sprite, styleGuide));
 
 // Компиляция в папку "dist" с отслеживанием изменений в файлах
 gulp.task('default',
@@ -115,13 +115,19 @@ function javascript() {
 // Компиляция изображений в "dist"
 function images() {
     return gulp.src('src/assets/img/**/*')
-        .pipe($.if(PRODUCTION, $.imagemin({
-            optimizationLevel: 5,
-            progressive: true,
-            interlaced: true,
-            use: [pngquant({quality: '50-65', speed: 4})],
+        .pipe($.if(PRODUCTION, imagemin({
+            progressive: true
         })))
         .pipe(gulp.dest(PATHS.dist + '/assets/img'));
+}
+
+// Генератор спрайтов
+function sprite() {    
+    var spriteData = gulp.src('src/assets/img/sprite-ico/*.png').pipe(spritesmith({
+        imgName: '../img/sprite.png',
+        cssName: 'sprite-icons.css'
+    }));
+    return spriteData.pipe(gulp.dest('src/assets/img/'));
 }
 
 // Запуск сервера
